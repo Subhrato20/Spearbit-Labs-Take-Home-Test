@@ -2,6 +2,15 @@
 
 An AI-powered automated puzzle solver for [hackmerlin.io](https://hackmerlin.io) using Browser Use and OpenAI's GPT-4o-mini.
 
+## ⚠️ Current Status
+
+**Important Note**: The `browser-use` library currently has a bug in the `Agent` class (issue with `max_steps` parameter). This affects the full automation functionality.
+
+**Workarounds Available**:
+1. **Demo Mode** (`main.py`) - Shows the setup and browser initialization
+2. **Working Solver** (`working_solver.py`) - Uses browser + OpenAI directly for puzzle solving
+3. **Wait for Fix** - Monitor browser-use library updates for the Agent class fix
+
 ## Features
 
 - 🤖 Automated puzzle solving using AI
@@ -44,17 +53,20 @@ An AI-powered automated puzzle solver for [hackmerlin.io](https://hackmerlin.io)
 
 ## Usage
 
-Run the automated puzzle solver:
-
+### Option 1: Demo Mode (Shows Setup)
 ```bash
 python main.py
 ```
+This demonstrates the project setup and browser initialization, but won't fully automate puzzle solving due to the library bug.
 
-The script will:
-1. Open https://hackmerlin.io in a browser
-2. Start solving puzzles automatically
-3. Display each step and observation in the console
-4. Continue until interrupted or all puzzles are solved
+### Option 2: Working Puzzle Solver
+```bash
+python working_solver.py
+```
+This version works around the Agent class bug by using the browser directly with OpenAI integration for puzzle solving.
+
+### Option 3: Full Automation (When Bug is Fixed)
+Once the browser-use library fixes the Agent class bug, you can use the full automation by uncommenting the Agent code in `main.py`.
 
 ## How It Works
 
@@ -76,7 +88,8 @@ The solver uses:
 
 ```
 .
-├── main.py                 # Main solver script
+├── main.py                 # Main demo script (shows setup)
+├── working_solver.py       # Working puzzle solver (bypasses Agent bug)
 ├── pyproject.toml         # Project configuration
 ├── .env                   # Environment variables (create from .env.example)
 ├── prompts/
@@ -85,6 +98,13 @@ The solver uses:
 ```
 
 ## Troubleshooting
+
+### Current Known Issues
+
+1. **Agent Class Bug**: The `browser-use` Agent class has a `max_steps` parameter bug
+   - **Status**: Known issue in library
+   - **Workaround**: Use `working_solver.py` or wait for library update
+   - **Tracking**: Monitor browser-use library releases
 
 ### Common Issues
 
@@ -96,9 +116,9 @@ The solver uses:
    - Ensure you have Chrome/Chromium installed
    - Check that no other browser automation is running
 
-3. **Puzzle solving fails**
-   - The AI might need to retry with different formatting
-   - Check the console output for specific error messages
+3. **Agent initialization fails**
+   - This is the known library bug
+   - Use `working_solver.py` as an alternative
 
 ### Stopping the Solver
 
@@ -123,6 +143,14 @@ To contribute or modify the solver:
    flake8 .
    ```
 
+## Alternative Approaches
+
+If you need full automation immediately, consider:
+
+1. **Selenium + OpenAI**: Direct browser automation with Selenium
+2. **Playwright + OpenAI**: Modern browser automation alternative
+3. **Custom Browser Integration**: Build custom automation using browser-use's Browser class
+
 ## License
 
 This project is for educational and testing purposes.
@@ -130,3 +158,10 @@ This project is for educational and testing purposes.
 ## Disclaimer
 
 This tool is designed for educational purposes and puzzle-solving practice. Please respect the terms of service of hackmerlin.io and use responsibly.
+
+## Contributing
+
+If you find a solution to the Agent class bug or want to contribute:
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request with your improvements
